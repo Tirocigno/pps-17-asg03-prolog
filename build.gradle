@@ -10,6 +10,9 @@ plugins {
 group 'it.unibo.pps2017'
 version '0.0.0'
 
+//Main class name
+mainClassName = 'it.unibo.pps17.MockScalaMain'
+
 sourceCompatibility = 1.8
 
 
@@ -32,9 +35,6 @@ ext {
 
 }
 
-runShadow {
-    // mainClassName = 'it.unibo.pps2017.discovery.DiscoveryMain'
-}
 
 repositories {
     mavenLocal()
