@@ -32,15 +32,8 @@ ext {
 
 }
 
-
-shadowJar {
-    transform(com.github.jengelman.gradle.plugins.shadow.transformers.AppendingTransformer) {
-        resource = 'reference.conf'
-    }
-}
-
 runShadow {
-    mainClassName = 'it.unibo.pps2017.discovery.DiscoveryMain'
+    // mainClassName = 'it.unibo.pps2017.discovery.DiscoveryMain'
 }
 
 repositories {
@@ -78,4 +71,4 @@ dependencies {
     testImplementation "org.scalacheck:scalacheck_$scalaBinaryVersion:$scalaCheckVersion"
 }
 
-defaultTasks 'clean', 'build', 'javadoc', 'scaladoc', 'reportScoverage'
+defaultTasks 'clean', 'build', 'javadoc', 'scaladoc'
