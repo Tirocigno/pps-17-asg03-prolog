@@ -1,16 +1,81 @@
+
 plugins {
     id 'java'
+    id 'scala'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '4.0.1'
 }
 
+//group and version.
 group 'it.unibo.pps2017'
-version '0.0'
+version '0.0.0'
 
 sourceCompatibility = 1.8
 
+
+//List of variables used in the file.
+ext {
+    //Scala version variables.
+    scalaBinaryVersion = '2.12'
+    scalaMajor = '2.12'
+    scalaMinorVersion = '6'
+    scalaVersion = "$scalaBinaryVersion.$scalaMinorVersion"
+
+    jUnitVersion = '4.12'
+
+
+    //Version for ScalaTest library.
+    scalaTestVersion = '3.0.1'
+    scalaCheckVersion = '1.14.0'
+
+    tuprologVersion = '3.3.0'
+
+}
+
+
+shadowJar {
+    transform(com.github.jengelman.gradle.plugins.shadow.transformers.AppendingTransformer) {
+        resource = 'reference.conf'
+    }
+}
+
+runShadow {
+    mainClassName = 'it.unibo.pps2017.discovery.DiscoveryMain'
+}
+
 repositories {
+    mavenLocal()
     mavenCentral()
+    jcenter()
+}
+
+// this makes the scala classes builds alongside the java ones.
+sourceSets {
+    main {
+        scala {
+            srcDirs = ['src/main/scala', 'src/main/java']
+        }
+        java {
+            srcDirs = []
+        }
+    }
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    //Support to scala language.
+    implementation "org.scala-lang:scala-library:$scalaVersion"
+
+    implementation "it.unibo.alice.tuprolog:tuprolog:$tuprologVersion"
+
+    //Dependency for Junit.
+    testImplementation "junit:junit:$jUnitVersion"
+
+    // Dependency for ScalaTest.
+    testImplementation "org.scalatest:scalatest_2.12:$scalaTestVersion"
+
+    //Dependencies for ScalaCheck.
+    testImplementation "org.scalacheck:scalacheck_$scalaBinaryVersion:$scalaCheckVersion"
 }
+
+defaultTasks 'clean', 'build', 'javadoc', 'scaladoc', 'reportScoverage'
