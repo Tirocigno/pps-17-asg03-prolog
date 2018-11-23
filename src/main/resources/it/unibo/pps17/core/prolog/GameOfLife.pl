@@ -45,6 +45,17 @@ XLOW is X+1,XTOP is X-1,YLOW is Y+1,YTOP is Y-1,
 L1=[pos(XLOW,Y), pos(XTOP,Y), pos(X,YLOW), pos(X,YTOP), pos(XLOW, YLOW), pos(XLOW, YTOP), pos(XTOP, YTOP), pos(XTOP,YLOW)],
 delete_out_board(L1,L).
 
+%Compute the value of a cell based on his neighborhood.
+compute_cell(P,TL,TL2) :-  member(P,AL),neighborhood(P,NL), alive_cells(AL),common_elements(NL, AL, C), C >= 2, C <= 3, set_pos(P,TL, 1, TL2),!.
+compute_cell(P,TL,TL2) :- neighborhood(P,NL), alive_cells(AL),common_elements(NL, AL, C), C == 3, set_pos(P,TL, 1, TL2),!.
+compute_cell(_,TL,TL).
+
+%Compute the whole board game on new status.
+compute_board(50,_, TL, TL) :- !.
+compute_board(X, 50, TL, AL) :- X1 is X + 1,Y1 is 0, compute_board(X1,Y1,TL,AL), !.
+compute_board(X, Y, TL, AL) :- compute_cell(pos(X,Y),TL,TL2),Y1 is Y+1, compute_board(X,Y1,TL2,AL).
+compute_board(AL) :- compute_board(0,0,[],AL).
+
 
 %-----COMMONS------
 
@@ -62,6 +73,12 @@ set_pos(P,TL,S,AL) :- S == 1, append_to_head(TL,P,AL).
 
 %Generate a random number in range from 0 to LIMIT - 1.
 random(N, LIMIT) :- rand_int(LIMIT,N).
+
+%Check how many elements two lists have in common.
+common_elements([],[],0).
+common_elements([],L,0).
+common_elements([H|T],L,N) :- member(H,L), common_elements(T,L,N1), N is N1+1,!.
+common_elements([H|T],L,N) :- common_elements(T,L,N). 
 
 %Update the alive cells fact.
 set_alive_cells(AL) :- retract(alive_cells(_)),assert(alive_cells(AL)).
