@@ -72,4 +72,4 @@ dependencies {
     testImplementation "org.scalacheck:scalacheck_$scalaBinaryVersion:$scalaCheckVersion"
 }
 
-defaultTasks 'clean', 'build', 'javadoc', 'scaladoc'
+defaultTasks 'clean', 'build', 'javadoc', 'scaladoc', 'shadowJar'
