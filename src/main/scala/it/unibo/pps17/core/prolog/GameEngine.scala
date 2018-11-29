@@ -1,7 +1,8 @@
 package it.unibo.pps17.core.prolog
 
 import alice.tuprolog.Prolog
-import it.unibo.pps17.core.prolog.wrapper.Position
+import it.unibo.pps17.core.prolog.wrapper.PrologToJavaConverter
+import it.unibo.pps17.core.prolog.wrapper.PrologToJavaConverter.PositionList
 
 /**
   * Define the basic operation called inside a game engine.
@@ -12,14 +13,14 @@ trait GameEngine {
     * Start the game inside the prolog engine.
     * @return the initial configuration of the game board.
     */
-  def startGame():List[Position]
+  def startGame(): PositionList
 
 
   /**
     * Compute next generation of cells.
     * @return the initial configuration of the
     */
-  def computeNextGeneration():List[Position]
+  def computeNextGeneration(): PositionList
 
 }
 
@@ -47,9 +48,11 @@ object GameEngine {
 
     val engine:Prolog = buildPrologEngineFromPaths(Set(GOL_THEORY_PATH))
 
-    override def startGame(): List[Position] = ???
+    override def startGame(): PositionList =
+      PrologToJavaConverter.parsePrologListToJava(engine.termSolve(Goals.START_GAME_GOAL))
 
-    override def computeNextGeneration(): List[Position] = ???
+    override def computeNextGeneration(): PositionList = ???
 
   }
 }
+
