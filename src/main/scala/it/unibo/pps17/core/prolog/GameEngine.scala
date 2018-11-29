@@ -1,5 +1,6 @@
 package it.unibo.pps17.core.prolog
 
+import alice.tuprolog.Prolog
 import it.unibo.pps17.core.prolog.wrapper.Position
 
 /**
@@ -20,10 +21,35 @@ trait GameEngine {
     */
   def computeNextGeneration():List[Position]
 
-  /**
-    * Check if the game is over.
-    * @return true if the game is over, false otherwise.
-    */
-  def isGameOver():Boolean
+}
 
+
+object GameEngine {
+
+  /**
+    * Build a prolog engine loading the specified theories.
+    * @param theoriesPaths a set containing all the theory file paths to load.
+    * @return a Prolog engine.
+    */
+  def buildPrologEngineFromPaths(theoriesPaths: Set[String]):Prolog = {
+    val engine:Prolog = new Prolog()
+    theoriesPaths.foreach(path => {
+     val file = io.Source.fromInputStream(getClass.getResourceAsStream(path)).mkString
+     engine.addTheory(file.asTheory)
+    }
+   )
+    engine
+  }
+
+
+
+  private class GameEngineImpl extends GameEngine {
+
+    val engine:Prolog = buildPrologEngineFromPaths(Set(GOL_THEORY_PATH))
+
+    override def startGame(): List[Position] = ???
+
+    override def computeNextGeneration(): List[Position] = ???
+
+  }
 }
