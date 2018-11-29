@@ -1,0 +1,15 @@
+language: scala
+
+script:
+- './gradlew clean build'
+after_success:
+
+deploy:
+  provider: releases
+  api-key: $GITHUB_API_KEY
+  skip_cleanup: true
+  file_glob: true
+  file: production/*
+  on:
+    repo: Tirocigno/pps-17-asg03-prolog
+    tags: true
