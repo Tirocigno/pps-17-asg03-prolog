@@ -13,21 +13,21 @@ package object prolog {
     /**
       * Val used for retrieving the X component of a board.
       */
-    val X = "X"
+    val X: String = "X"
     /**
       * Val used for retrieving the Y component of a board.
       */
-    val Y = "Y"
+    val Y: String = "Y"
 
     /**
       * Variable to bind to the list of alive cells.
       */
-    val ALIVE_CELL_LIST = "AL"
+    val ALIVE_CELL_LIST: String = "AL"
 
     /**
       * Variable to bind to generation index.
       */
-    val GENERATION = "G"
+    val GENERATION: String = "G"
   }
 
 
@@ -36,17 +36,17 @@ package object prolog {
     /**
       * Goal to retrieve the dimension of the board.
       */
-    val POS_GOAL = "pos(" + Variables.X + ", " + Variables.Y + ")."
+    val BOARD_GOAL: String = "board(" + Variables.X + ", " + Variables.Y + ")."
 
     /**
       * Start game goal.
       */
-    val START_GAME_GOAL = "setup_board(" + Variables.ALIVE_CELL_LIST + ")."
+    val START_GAME_GOAL: String = "setup_board(" + Variables.ALIVE_CELL_LIST + ")."
 
     /**
       * Next generation goal.
       */
-    val NEXT_GENERATION_GOAL = "compute_next_generation(" + Variables.ALIVE_CELL_LIST + "," +
+    val NEXT_GENERATION_GOAL: String = "compute_next_generation(" + Variables.ALIVE_CELL_LIST + "," +
       Variables.GENERATION + ")."
   }
 

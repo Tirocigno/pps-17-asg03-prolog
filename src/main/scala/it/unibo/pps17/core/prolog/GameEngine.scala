@@ -36,6 +36,13 @@ trait GameEngine {
 object GameEngine {
 
   /**
+    * Create a new gameEngine instance.
+    *
+    * @return a GameEngine object.
+    */
+  def apply(): GameEngine = new GameEngineImpl()
+
+  /**
     * Build a prolog engine loading the specified theories.
     * @param theoriesPaths a set containing all the theory file paths to load.
     * @return a Prolog engine.
@@ -57,7 +64,7 @@ object GameEngine {
     val engine:Prolog = buildPrologEngineFromPaths(Set(GOL_THEORY_PATH))
 
     override def getBoardDimension: (Int, Int) = {
-      val solution = engine.solve(Goals.POS_GOAL)
+      val solution = engine.solve(Goals.BOARD_GOAL)
       val xPos = solution.getTerm(Variables.X).toString
       val yPos = solution.getTerm(Variables.Y).toString
       (xPos.toInt, yPos.toInt)
