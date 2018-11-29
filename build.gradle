@@ -9,7 +9,7 @@ plugins {
 
 //group and version.
 group 'it.unibo.pps2017'
-version '1.2.2'
+version '1.2.1'
 
 //Main class name
 mainClassName = 'it.unibo.pps17.MockScalaMain'
