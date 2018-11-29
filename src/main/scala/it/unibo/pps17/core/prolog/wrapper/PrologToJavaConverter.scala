@@ -3,6 +3,7 @@ package it.unibo.pps17.core.prolog.wrapper
 import java.util
 
 import alice.tuprolog.{Struct, Term}
+
 import scala.language.implicitConversions
 
 
@@ -55,6 +56,16 @@ object PrologToJavaConverter {
     }
     positionList
     }
+
+  /**
+    * Convert a generation calculated via Prolog engine to a scala object.
+    *
+    * @param prologList      the list of alive cells as prolog term.
+    * @param generationIndex the index of the generation as a prolog fact.
+    * @return a generation object built upon the specified parameters.
+    */
+  def parseGeneration(prologList: Term, generationIndex: Term): Generation =
+    Generation(parsePrologListToJava(prologList), generationIndex.toString.toInt)
 
 
 }
