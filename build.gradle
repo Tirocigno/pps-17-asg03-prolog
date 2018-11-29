@@ -6,9 +6,10 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '4.0.1'
 }
 
+
 //group and version.
 group 'it.unibo.pps2017'
-version '0.0.0'
+version '1.0.0'
 
 //Main class name
 mainClassName = 'it.unibo.pps17.MockScalaMain'
