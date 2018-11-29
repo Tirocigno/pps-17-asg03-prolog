@@ -9,7 +9,7 @@ deploy:
   api-key: $GITHUB_API_KEY
   skip_cleanup: true
   file_glob: true
-  file: production/*
+  file: build/libs/*-all.jar
   on:
     repo: Tirocigno/pps-17-asg03-prolog
     tags: true
