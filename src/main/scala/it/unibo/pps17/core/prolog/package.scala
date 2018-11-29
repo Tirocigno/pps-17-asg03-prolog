@@ -9,8 +9,15 @@ package object prolog {
     */
   val GOL_THEORY_PATH = "GameOfLife.pl"
 
-
-  object Goals {
+  object Variables {
+    /**
+      * Val used for retrieving the X component of a board.
+      */
+    val X = "X"
+    /**
+      * Val used for retrieving the Y component of a board.
+      */
+    val Y = "Y"
 
     /**
       * Variable to bind to the list of alive cells.
@@ -21,16 +28,26 @@ package object prolog {
       * Variable to bind to generation index.
       */
     val GENERATION = "G"
+  }
+
+
+  object Goals {
+
+    /**
+      * Goal to retrieve the dimension of the board.
+      */
+    val POS_GOAL = "pos(" + Variables.X + ", " + Variables.Y + ")."
 
     /**
       * Start game goal.
       */
-    val START_GAME_GOAL = "setup_board(" + ALIVE_CELL_LIST + ")."
+    val START_GAME_GOAL = "setup_board(" + Variables.ALIVE_CELL_LIST + ")."
 
     /**
       * Next generation goal.
       */
-    val NEXT_GENERATION_GOAL = "compute_next_generation(" + ALIVE_CELL_LIST + "," + GENERATION + ")."
+    val NEXT_GENERATION_GOAL = "compute_next_generation(" + Variables.ALIVE_CELL_LIST + "," +
+      Variables.GENERATION + ")."
   }
 
 
