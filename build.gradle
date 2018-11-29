@@ -4,7 +4,6 @@ plugins {
     id 'scala'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '4.0.1'
-    id 'net.researchgate.release' version '2.6.0'
 }
 
 
