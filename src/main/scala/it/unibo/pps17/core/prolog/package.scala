@@ -9,6 +9,7 @@ package object prolog {
     */
   val GOL_THEORY_PATH = "GameOfLife.pl"
 
+
   object Goals {
 
     /**
@@ -24,12 +25,12 @@ package object prolog {
     /**
       * Start game goal.
       */
-    val START_GAME_GOAL = "setup_board("+GENERATION+")"
+    val START_GAME_GOAL = "setup_board(" + ALIVE_CELL_LIST + ")."
 
     /**
       * Next generation goal.
       */
-    val NEXT_GENERATION_GOAL = "compute_next_generation("+ ALIVE_CELL_LIST+ ","+ GENERATION +")"
+    val NEXT_GENERATION_GOAL = "compute_next_generation(" + ALIVE_CELL_LIST + "," + GENERATION + ")."
   }
 
 
