@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121"
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/" xmlns="http://javafx.com/javafx/"
+            id="root" fx:id="root"
             fx:controller="it.unibo.pps17.view.MainStageController">
-    <children>
-        <BorderPane layoutY="41.0" prefHeight="300.0" prefWidth="600.0">
-            <top>
-                <Pane prefHeight="115.0" prefWidth="600.0" BorderPane.alignment="CENTER"/>
-            </top>
-        </BorderPane>
-        <Button layoutX="25.0" layoutY="352.0" mnemonicParsing="false" text="Start"/>
-        <Button layoutX="169.0" layoutY="352.0" mnemonicParsing="false" text="Reset"/>
-        <Button layoutX="95.0" layoutY="352.0" mnemonicParsing="false" text="Next"/>
-        <Label layoutX="158.0" layoutY="14.0" text="Generazione corrente: "/>
-        <Label layoutX="329.0" layoutY="357.0" text="Celle in vita:"/>
-    </children>
+    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <center>
+            <ScrollPane fx:id="scroll" id="scroll"/>
+        </center>
+        <bottom>
+            <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+                <ButtonBar>
+                    <buttons>
+                        <Button id="start" fx:id="startButton" mnemonicParsing="false" text="Start"
+                                ButtonBar.buttonData="LEFT"/>
+                        <Button id="next" fx:id="nextButton" mnemonicParsing="false" text="Next"
+                                disable="true" ButtonBar.buttonData="LEFT"/>
+                        <Button id="reset" fx:id="resetButton" mnemonicParsing="false" text="Reset"
+                                disable="true" ButtonBar.buttonData="LEFT"/>
+                        <Label text="Live cells: " ButtonBar.buttonData="RIGHT"/>
+                        <Label id="live" fx:id="aliveCells" text="0" ButtonBar.buttonData="RIGHT"/>
+                        <Label text="Generation: " ButtonBar.buttonData="RIGHT"/>
+                        <Label id="generation" fx:id="generation" text="0" ButtonBar.buttonData="RIGHT"/>
+                    </buttons>
+                </ButtonBar>
+            </HBox>
+        </bottom>
+    </BorderPane>
 </AnchorPane>
+
