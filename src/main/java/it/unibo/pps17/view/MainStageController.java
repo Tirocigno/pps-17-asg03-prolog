@@ -1,8 +1,11 @@
 package it.unibo.pps17.view;
 
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 
 public class MainStageController {
 
@@ -21,7 +24,14 @@ public class MainStageController {
     @FXML
     public Label aliveCells;
 
+    @FXML
+    public Canvas canvas;
+
     public static String MAIN_LAYOUT = "mainStage.fxml";
+
+    private GraphicsContext graphicsContext;
+
+    private int drawingOffset = 0;
 
 
     /**
@@ -29,9 +39,18 @@ public class MainStageController {
      */
     @FXML
     public void initialize() {
-        startButton.setOnAction(event -> {
-            generation.setText("Label updated");
-        });
+        graphicsContext = canvas.getGraphicsContext2D();
+        graphicsContext.setFill(Color.BLUE);
+    }
+
+
+    public void computeOffset(int boardXDimension, int yboardDimension) {
+        this.drawingOffset = Integer.max((int) canvas.getWidth() / boardXDimension,
+                (int) canvas.getHeight() / yboardDimension);
+    }
+
+    private void displayCellOnCanvas(int posX, int posY) {
+        graphicsContext.fillRect(posX * drawingOffset, posY * drawingOffset, drawingOffset, drawingOffset);
     }
 
 }
