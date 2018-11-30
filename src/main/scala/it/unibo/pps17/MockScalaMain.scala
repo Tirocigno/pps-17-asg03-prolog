@@ -1,10 +1,10 @@
 package it.unibo.pps17
 
-import it.unibo.pps17.controller.Controller
+import it.unibo.pps17.controller.TextController
 
 object MockScalaMain extends App {
 
-  val controller = new Controller()
+  val controller = new TextController()
 
   println("Dimensioni della schacchiera: ")
   controller.boardDimension()
