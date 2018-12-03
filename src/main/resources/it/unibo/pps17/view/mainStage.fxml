@@ -15,15 +15,15 @@
                 <ButtonBar>
                     <buttons>
                         <Button id="start" fx:id="startButton" mnemonicParsing="false" text="Start"
-                                ButtonBar.buttonData="LEFT"/>
+                                ButtonBar.buttonData="LEFT" onAction="#start"/>
                         <Button id="next" fx:id="nextButton" disable="true" mnemonicParsing="false" text="Next"
-                                ButtonBar.buttonData="LEFT"/>
+                                ButtonBar.buttonData="LEFT" onAction="#next"/>
                         <Button id="reset" fx:id="resetButton" disable="true" mnemonicParsing="false" text="Reset"
-                                ButtonBar.buttonData="LEFT"/>
+                                ButtonBar.buttonData="LEFT" onAction="#reset"/>
                         <Label text="Live cells: " ButtonBar.buttonData="RIGHT"/>
-                        <Label id="live" fx:id="aliveCells" text="0" ButtonBar.buttonData="RIGHT"/>
+                        <Label id="live" fx:id="aliveCells" ButtonBar.buttonData="RIGHT"/>
                         <Label text="Generation: " ButtonBar.buttonData="RIGHT"/>
-                        <Label id="generation" fx:id="generation" text="0" ButtonBar.buttonData="RIGHT"/>
+                        <Label id="generation" fx:id="generation" ButtonBar.buttonData="RIGHT"/>
                     </buttons>
                 </ButtonBar>
             </HBox>
