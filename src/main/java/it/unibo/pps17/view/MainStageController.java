@@ -1,12 +1,15 @@
 package it.unibo.pps17.view;
 
 import it.unibo.pps17.controller.GuiController;
+import it.unibo.pps17.core.prolog.wrapper.Position;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+
+import java.util.List;
 
 public class MainStageController {
 
@@ -29,6 +32,9 @@ public class MainStageController {
     public Canvas canvas;
 
     public static String MAIN_LAYOUT = "mainStage.fxml";
+    private static String RESET_MESSAGE = "";
+    private static String START_MESSAGE = "0";
+    private static int BORDER_DEPTH = 1;
 
     private GraphicsContext graphicsContext;
 
@@ -59,6 +65,8 @@ public class MainStageController {
         this.startButton.setDisable(true);
         this.nextButton.setDisable(false);
         this.resetButton.setDisable(false);
+        this.updateBothLabels(START_MESSAGE);
+        controller.startGame();
     }
 
     public void next() {
@@ -70,6 +78,9 @@ public class MainStageController {
         this.nextButton.setDisable(true);
         this.resetButton.setDisable(true);
         controller.resetGameEngine();
+        this.resetCanvas();
+        this.updateBothLabels(RESET_MESSAGE);
+
     }
 
     public void updateGeneration(final String generationCount) {
@@ -84,19 +95,44 @@ public class MainStageController {
         this.computeOffset(boardXDimension, boardYDimension);
     }
 
+    public void displayAliveCells(final List<Position> aliveCells) {
+        this.resetCanvas();
+        aliveCells.forEach(cell -> displayCellOnCanvas(cell.x(), cell.y()));
+    }
+
 
     private void updateLabel(final Label l, final String textToSet) {
         l.setText(textToSet);
     }
 
 
-    private void computeOffset(int boardXDimension, int yboardDimension) {
+    private void computeOffset(int boardXDimension, int boardYDimension) {
         this.drawingOffset = Integer.max((int) canvas.getWidth() / boardXDimension,
-                (int) canvas.getHeight() / yboardDimension);
+                (int) canvas.getHeight() / boardYDimension);
     }
 
     private void displayCellOnCanvas(int posX, int posY) {
+        graphicsContext.setFill(Color.BLUE);
         graphicsContext.fillRect(posX * drawingOffset, posY * drawingOffset, drawingOffset, drawingOffset);
+        paintCellBoarder(posX, posY);
+    }
+
+    private void resetCanvas() {
+        graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    }
+
+    private void paintCellBoarder(int posX, int posY) {
+        graphicsContext.setFill(Color.BLACK);
+        graphicsContext.fillRect(posX * drawingOffset, posY * drawingOffset, drawingOffset, BORDER_DEPTH);
+        graphicsContext.fillRect(posX * drawingOffset, (posY + 1) * drawingOffset - BORDER_DEPTH, drawingOffset, BORDER_DEPTH);
+        graphicsContext.fillRect(posX * drawingOffset, posY * drawingOffset, BORDER_DEPTH, drawingOffset);
+        graphicsContext.fillRect((posX + 1) * drawingOffset - BORDER_DEPTH, posY * drawingOffset, BORDER_DEPTH, drawingOffset);
+
+    }
+
+    private void updateBothLabels(final String message) {
+        this.updateLabel(this.aliveCells, message);
+        this.updateLabel(this.generation, message);
     }
 
 }
