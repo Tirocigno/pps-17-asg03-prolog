@@ -16,6 +16,8 @@ trait GuiController extends Controller {
 
 object GuiController {
 
+  def apply(): GuiController = new GuiControllerImpl()
+
   private class GuiControllerImpl() extends GuiController {
     var viewController: MainStageController = _
     var engine: GameEngine = GameEngine()
