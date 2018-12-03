@@ -1,5 +1,6 @@
 package it.unibo.pps17.view;
 
+import it.unibo.pps17.controller.GuiController;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -33,6 +34,8 @@ public class MainStageController {
 
     private int drawingOffset = 0;
 
+    private GuiController controller;
+
 
     /**
      * Initializes the layout.
@@ -43,8 +46,51 @@ public class MainStageController {
         graphicsContext.setFill(Color.BLUE);
     }
 
+    /**
+     * Set the controller inside the object.
+     *
+     * @param guiController a reference to a controller object.
+     */
+    public void setGuiController(final GuiController guiController) {
+        this.controller = guiController;
+    }
 
-    public void computeOffset(int boardXDimension, int yboardDimension) {
+    public void start() {
+        this.startButton.setDisable(true);
+        this.nextButton.setDisable(false);
+        this.resetButton.setDisable(false);
+    }
+
+    public void next() {
+        controller.computeNextGeneration();
+    }
+
+    public void reset() {
+        this.startButton.setDisable(false);
+        this.nextButton.setDisable(true);
+        this.resetButton.setDisable(true);
+        controller.resetGameEngine();
+    }
+
+    public void updateGeneration(final String generationCount) {
+        this.updateLabel(this.generation, generationCount);
+    }
+
+    public void updateAliveCellsLabel(final String aliveCellsCount) {
+        this.updateLabel(this.aliveCells, aliveCellsCount);
+    }
+
+    public void initializeBoard(final int boardXDimension, final int boardYDimension) {
+        this.computeOffset(boardXDimension, boardYDimension);
+    }
+
+
+    private void updateLabel(final Label l, final String textToSet) {
+        l.setText(textToSet);
+    }
+
+
+    private void computeOffset(int boardXDimension, int yboardDimension) {
         this.drawingOffset = Integer.max((int) canvas.getWidth() / boardXDimension,
                 (int) canvas.getHeight() / yboardDimension);
     }
