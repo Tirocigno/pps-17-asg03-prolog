@@ -2,7 +2,7 @@ package it.unibo.pps17.controller
 
 import it.unibo.pps17.core.prolog.GameEngine
 import it.unibo.pps17.core.prolog.wrapper.PrologToJavaConverter.PositionList
-import it.unibo.pps17.view.MainStageController
+import it.unibo.pps17.view.Gui
 
 trait GuiController extends Controller {
 
@@ -11,7 +11,7 @@ trait GuiController extends Controller {
     *
     * @param viewController controller of the graphic stage.
     */
-  def setViewController(viewController: MainStageController)
+  def setViewController(viewController: Gui)
 }
 
 object GuiController {
@@ -19,11 +19,11 @@ object GuiController {
   def apply(): GuiController = new GuiControllerImpl()
 
   private class GuiControllerImpl() extends GuiController {
-    var viewController: MainStageController = _
+    var viewController: Gui = _
     var engine: GameEngine = GameEngine()
 
 
-    override def setViewController(viewController: MainStageController): Unit = {
+    override def setViewController(viewController: Gui): Unit = {
       this.viewController = viewController
       initializeViewController()
     }
@@ -50,7 +50,7 @@ object GuiController {
 
     private def displayAndUpdateAliveCellsList(aliveCellsList: PositionList): Unit = {
       viewController.displayAliveCells(aliveCellsList)
-      viewController.updateAliveCellsLabel(aliveCellsList.size().toString)
+      viewController.displayAliveCellsCount(aliveCellsList.size().toString)
     }
   }
 

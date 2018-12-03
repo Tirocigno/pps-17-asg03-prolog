@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
-public class MainStageController {
+public class MainStageController implements Gui {
 
     @FXML
     public Button startButton;
@@ -52,11 +52,7 @@ public class MainStageController {
         graphicsContext.setFill(Color.BLUE);
     }
 
-    /**
-     * Set the controller inside the object.
-     *
-     * @param guiController a reference to a controller object.
-     */
+    @Override
     public void setGuiController(final GuiController guiController) {
         this.controller = guiController;
     }
@@ -83,16 +79,18 @@ public class MainStageController {
 
     }
 
+    @Override
     public void updateGeneration(final String generationCount) {
         this.updateLabel(this.generation, generationCount);
     }
 
-    public void updateAliveCellsLabel(final String aliveCellsCount) {
-        this.updateLabel(this.aliveCells, aliveCellsCount);
-    }
-
     public void initializeBoard(final int boardXDimension, final int boardYDimension) {
         this.computeOffset(boardXDimension, boardYDimension);
+    }
+
+    @Override
+    public void displayAliveCellsCount(String aliveCellsCount) {
+        this.updateLabel(this.aliveCells, aliveCellsCount);
     }
 
     public void displayAliveCells(final List<Position> aliveCells) {
