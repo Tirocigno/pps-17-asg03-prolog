@@ -9,10 +9,6 @@ trait Controller {
     */
   def resetGameEngine(): Unit
 
-  /**
-    * Get the board dimension.
-    */
-  def boardDimension(): Unit
 
   /**
     * Start the game.
@@ -33,24 +29,10 @@ class TextController() extends Controller {
 
   var gameEngine = GameEngine()
 
-  /**
-    * Reset the game engine.
-    */
   override def resetGameEngine(): Unit = gameEngine = GameEngine()
 
-  /**
-    * Get the board dimension.
-    */
-  override def boardDimension(): Unit = println(gameEngine.getBoardDimension)
-
-  /**
-    * Start the game.
-    */
   override def startGame(): Unit = println(gameEngine.startGame())
 
-  /**
-    * Compute next generation and print the system status.
-    */
   override def computeNextGeneration(): Unit = println(gameEngine.computeNextGeneration())
 
 }
