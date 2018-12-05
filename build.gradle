@@ -9,7 +9,7 @@ plugins {
 
 //group and version.
 group 'it.unibo.pps2017'
-version '2.0.0'
+version '2.1.0'
 
 //Main class name
 mainClassName = 'it.unibo.pps17.GuiMain'
