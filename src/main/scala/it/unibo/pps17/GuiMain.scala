@@ -1,3 +1,5 @@
+package it.unibo.pps17
+
 import it.unibo.pps17.controller.GuiController
 import it.unibo.pps17.view.MainStageController
 import javafx.application.{Application, Platform}
