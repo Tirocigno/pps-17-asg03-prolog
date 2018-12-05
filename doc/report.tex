@@ -25,24 +25,26 @@
 
 \section{Description of the code}
 L'elaborato che ho scelto di realizzare consiste in una semplice implementazione di \textit{Game of Life}, automa cellulare celebre in letteratura, le cui regole sono descritte alla \href{https://en.wikipedia.org/wiki/Conway\%27s_Game_of_Life#Rules}{seguente pagina}.
-Per realizzare il progetto, ho scelto di adottare un pattern \textit{MVC} dove per la parte di \textit{view} e \textit{controller} ho utilizzato i linguaggi Scala e Java, mentre per quanto riguarda il \texttt{model} ho cercato di gestire tutta la complessità del gioco utilizzando la programmazione logica.\\
-Il focus dell'assignment è stato nel realizzare la soluzione a un problema ben noto, che ho avuto modo di trattare utilizzando diversi paradigmi di programmazione, applicando un paradigma totalmente differente dai precedenti, cercando di sfruttarne al meglio le potenzialità e di inquadrarne i difetti rispetto alle altre soluzioni.
+Per realizzare il progetto, ho scelto di adottare un pattern \textit{MVC} dove per la parte di \textit{view} e \textit{controller} ho utilizzato i linguaggi Scala e Java, mentre per quanto riguarda il \textit{model} ho cercato di gestire tutta la complessità del gioco utilizzando esclusivamente la programmazione logica.\\
+Il focus dell'assignment è stato nel realizzare la soluzione a un problema ben noto, che ho avuto modo di trattare utilizzando diversi paradigmi di programmazione, applicando un paradigma totalmente differente dai precedenti, cercando di sfruttarne al meglio le potenzialità e di inquadrarne i difetti.
 
 
 \section{Techniques used}
 \begin{itemize}
-	\item \textbf{Minimalità della soluzione proposta:} In linea natura coincisa di Prolog, ho cercato di limitare al massimo le dimensioni del codice: grazie alle possibilità offerte dalla programmazione logica, ho limitato gli elementi fondamentali di cui occorre mantenere lo stato a:
+	\item \textbf{Minimalità della soluzione proposta:} In linea con la natura coincisa di Prolog, ho cercato di limitare al massimo le dimensioni del codice: grazie alle possibilità offerte dalla programmazione logica, ho limitato gli elementi fondamentali di cui occorre mantenere lo stato a:
 	\begin{itemize}
 		\item Le dimensioni della scacchiera di gioco.
 		\item Una lista contenente la posizione delle celle in vita durante generazione corrente
 		\item Il numero di generazioni trascorse
 	\end{itemize}
-	\item \textbf{Predicati Tail-Recursion:} Data la necessità di alcune regole di iterare ricorsivamente come le strutture di ciclo presenti nei principali linguaggi di programmazione, ho scelto di realizzare tali regole e i predicati che le compongono come \textit{tail-recursive}, in modo da massimizzare l'efficienza di tale computazione. \texttt{generate\_board} e \texttt{compute\_board} sono due regole realizzate seguendo quanto detto sopra.
+	\item \textbf{Predicati Tail-Recursion:} Data la necessità di alcune regole di compiere operazioni di natura ciclica, ho scelto di realizzare tali regole e i predicati che le compongono come \textit{tail-recursive}, in modo da massimizzare l'efficienza di tale computazione. \texttt{generate\_board} e \texttt{compute\_board} sono due regole realizzate seguendo quanto detto sopra.
 	\item \textbf{Integrazione Java-Prolog:} Avendo scelto di mettere a disposizione un'interfaccia grafica scritta in Java al programma, è stato necessario integrare in qualche modo la parte di codice scritta in Prolog con le librerie Java. Per realizzare questa integrazione, ho deciso di sfruttare le API messe a disposizione dalla libreria \texttt{alice.tuprolog}, riuscendo così a ottenere tutta la parte di computazione logica accessibile da codice Java; unica problematica non banale nella sua risoluzione è stata la conversione delle liste Prolog in Java, risolta tramite una combinazione di primitive messe a disposizione dalla libreria per scorrere gli elementi delle liste e codice appositamente scritto per effettuare la conversione del singolo elemento.
 	\item \textbf{Performance:} dovendo procedere a una computazione non banale per un elevato numero di celle ad ogni generazione, mi sono scontrato più volte col problema delle performance, trovandomi a dover pensare soluzioni che tenessero conto della complessità computazionale dei predicati presenti nei corpi delle varie regole. Un esempio è sicuramente il predicato \texttt{append\_to\_head}, che inserisce un elemento in testa a una lista, utilizzato al posto delle classiche regole di inserimento che prevedono l'aggiunta del nuovo elemento in coda: non essendo rilevante l'ordine all'interno della lista delle celle in vita, si riduce notevolmente la complessità computazionale dell'inserimento da \textit{O(n)} a un tempo costante.\\
 \end{itemize}
 
 \section{Self-evaluation}
+Personalmente credo di aver lavorato in maniera discreta per questo assignment, non ho voluto porre il focus dell'elaborato su un problema che reputavo particolarmente adatto alle potenzialità della programmazione logica, quanto più mi sono concentrato nel risolvere un problema già noto e risolto con vari paradigmi di programmazione, ponendo l'accento sulle differenze tra la soluzione delineata con la programmazione logica e le altre già realizzate.\\
+Sicuramente questa scelta mi ha impedito di sperimentare appieno tutte le potenzialità della programmazione logica, ma mi ha anche spinto a ragionare e progettare secondo le meccaniche di tale paradigma di programmazione.
 
  
 \end{document}
